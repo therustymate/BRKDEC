@@ -1,0 +1,7 @@
+﻿  XStringer_test.cpp
+C:\Users\rusty\source\repos\XStringer_test\BRKDEC.h(105,9): warning C4005: 'BRKDEC': macro redefinition
+  (compiling source file 'XStringer_test.cpp')
+      C:\Users\rusty\source\repos\XStringer_test\BRKDEC.h(2,9):
+      see previous definition of 'BRKDEC'
+  
+  XStringer_test.vcxproj -> C:\Users\rusty\source\repos\XStringer_test\x64\Debug\XStringer_test.exe
