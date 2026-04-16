@@ -1,5 +1,5 @@
 # BRKDEC
-Portable Anti Decompiler Library
+Lightweight Anti-Decompiler Library
 
 
 The concept of this project was derived from prior work:  [android1337/brkida](https://github.com/android1337/brkida)
