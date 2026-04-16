@@ -2,7 +2,7 @@
 Portable Anti Decompiler Library
 
 
-**The concept of this project was derived from prior work by [android1337/brkida](https://github.com/android1337/brkida).**
+The concept of this project was derived from prior work:  [android1337/brkida](https://github.com/android1337/brkida)
 
 ## Disclaimer
 This project and all associated materials are provided strictly for authorized red teaming and educational and research purposes only.
