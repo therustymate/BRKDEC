@@ -158,15 +158,15 @@ int sub_1150()
 //----- (0000000000001180) ----------------------------------------------------
 int __fastcall main(int a1, char **a2, char **a3)
 {
-  return sub_1150();
+    return sub_1150();
 }
 
 //----- (0000000000001192) ----------------------------------------------------
 // positive sp value has been detected, the output may be wrong!
 __int64 sub_1192()
 {
-  puts("done!");
-  return 0;
+    puts("done!");
+    return 0;
 }
 // 11A1: positive sp value 8 has been found
 // 1192: using guessed type __int64 sub_1192();
