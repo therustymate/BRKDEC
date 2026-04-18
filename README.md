@@ -105,6 +105,7 @@ To demonstrate the effectiveness of the outcomes, simple samples written in C an
 
 ### Validation Assumption
 - The compiled binary does not contain debug symbols
+- The compiled binary is built with recommended optimizations (-O2)
 
 
 ## Research
