@@ -241,7 +241,7 @@ int32_t main(int32_t argc, char** argv, char** envp)
 
 
 ## References
-ChatGPT and DeepSeek were used to improve the technical English expressions in this document.
+ChatGPT, Gemini, and DeepSeek were used to improve the technical English expressions in this document.
 
 * [https://github.com/android1337/brkida](https://github.com/android1337/brkida)
 * [https://en.wikipedia.org/wiki/Disassembler](https://en.wikipedia.org/wiki/Disassembler)
