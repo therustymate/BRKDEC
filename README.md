@@ -118,6 +118,8 @@ However, when the return address is manipulated such that a called function (e.g
 
 ![BRKDEC_FUNC_BOUNDARY](./rsrc/function_boundary/BRKDEC_FUNC_BOUNDARY.png)
 
+[Ret2 Reverse Engineering Blog](https://blog.ret2.io/2017/11/16/dangers-of-the-decompiler/) also introduced a similar technique. In that blog post, an exploit-like stack pivoting technique was demonstrated using a ROP chain embedded within the binary to achieve return hijacking.
+
 ### Pseudocode Obfuscation
 
 ### Variable Obfuscation
