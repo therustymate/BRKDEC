@@ -116,7 +116,7 @@ This technique exploits the assumption made by decompilers that normal call/retu
 
 However, when the return address is manipulated such that a called function (e.g. printf in libc) transfers execution flow to a function other than the original caller, the actual execution flow continues across function boundaries. This creates a discrepancy between the CFG constructed by the decompiler and the actual execution flow, ultimately resulting in a function boundary detection failure.
 
-![BRKDEC_FUNC_BOUNDARY](./rsrc/function_boundary//BRKDEC_FUNC_BOUNDARY.png)
+![BRKDEC_FUNC_BOUNDARY](./rsrc/function_boundary/BRKDEC_FUNC_BOUNDARY.png)
 
 ### Pseudocode Obfuscation
 
