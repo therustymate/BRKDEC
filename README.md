@@ -248,3 +248,4 @@ ChatGPT, Gemini, and DeepSeek were used to improve the technical English express
 * [https://github.com/android1337/brkida](https://github.com/android1337/brkida)
 * [https://en.wikipedia.org/wiki/Disassembler](https://en.wikipedia.org/wiki/Disassembler)
 * [https://en.wikipedia.org/wiki/Control-flow_graph](https://en.wikipedia.org/wiki/Control-flow_graph)
+* [https://blog.ret2.io/2017/11/16/dangers-of-the-decompiler/](https://blog.ret2.io/2017/11/16/dangers-of-the-decompiler/)
