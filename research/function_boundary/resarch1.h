@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 void TRIGGER_FUNCTION() { printf("\r"); }
-void RETURN_CALL(void *p) {
+void RETURN_CALL() {
     void* TRIGGER = (void*)TRIGGER_FUNCTION;
     __asm__ volatile (
         "leaq 1f(%%rip), %%rax\n\t"
@@ -18,9 +18,6 @@ void RETURN_CALL(void *p) {
     );
 }
 
-#define BRKDEC_FUNC_BOUNDARY \
-{ \
-    RETURN_CALL((void*)TRIGGER_FUNCTION); \
-}
+#define BRKDEC_FUNC_BOUNDARY { RETURN_CALL(); }
 
 #endif
