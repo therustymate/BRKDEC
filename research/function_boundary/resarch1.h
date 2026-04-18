@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <threads.h>
 
-void TRIGGER_FUNCTION() { thrd_yield(); }
-void RETURN_CALL() {
+static inline void TRIGGER_FUNCTION() { thrd_yield(); }
+static inline void RETURN_CALL() {
     void* TRIGGER = (void*)TRIGGER_FUNCTION;
     __asm__ volatile (
         // [ SAVE REGISTERS ]
