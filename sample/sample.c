@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#include "BRKDEC.h"
 
 static int mix_value(int x, int seed) {
+    BRKDEC_FUNC_BOUNDARY;
     int v = x ^ (seed * 31);
 
     if ((v & 1) == 0) {
@@ -19,6 +21,7 @@ static int mix_value(int x, int seed) {
 }
 
 static int transform_item(int value, int index, int mode) {
+    BRKDEC_FUNC_BOUNDARY;
     int out = value;
 
     switch (mode % 4) {
@@ -48,6 +51,7 @@ static int transform_item(int value, int index, int mode) {
 }
 
 int analyze_buffer(const int *buf, int len, int seed) {
+    BRKDEC_FUNC_BOUNDARY;
     int score = 0;
     int penalty = 0;
     int i;
@@ -90,6 +94,7 @@ int analyze_buffer(const int *buf, int len, int seed) {
 }
 
 int classify_score(int score) {
+    BRKDEC_FUNC_BOUNDARY;
     if (score < 0) {
         return -1;
     } else if (score < 100) {
@@ -102,13 +107,14 @@ int classify_score(int score) {
 }
 
 int main(void) {
+    BRKDEC_FUNC_BOUNDARY;
     int data[] = {12, 7, 0, 31, 44, 9, 18, 5, 27, 63};
     int len = (int)(sizeof(data) / sizeof(data[0]));
     int seed = 13;
 
     int score = analyze_buffer(data, len, seed);
     int cls = classify_score(score);
-
+    
     printf("score = %d\n", score);
     printf("class = %d\n", cls);
 
