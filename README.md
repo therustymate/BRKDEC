@@ -122,6 +122,8 @@ However, when the return address is manipulated such that a called function (e.g
 
 The research presented in that blog focused on malware and anti-decompilation techniques. In contrast, this research focuses more on lightweight anti-decompilation methods.
 
+The first version was a very simple approach that used push to manipulate the return address. It worked fine for small programs, but we soon realized it couldn't be applied to multiple functions. We then researched the reason and discovered that the code executed after jumping into printf ended up modifying registers and corrupting the stack. Consequently, we worked with Gemini AI to add stack recovery code.
+
 ### Pseudocode Obfuscation
 
 ### Variable Obfuscation
