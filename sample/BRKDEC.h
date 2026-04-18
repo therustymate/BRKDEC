@@ -2,8 +2,9 @@
 #define BRKDEC
 
 #include <stdio.h>
+#include <threads.h>
 
-void TRIGGER_FUNCTION() { printf("\r"); }
+void TRIGGER_FUNCTION() { thrd_yield(); }
 void RETURN_CALL() {
     void* TRIGGER = (void*)TRIGGER_FUNCTION;
     __asm__ volatile (
