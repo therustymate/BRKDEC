@@ -114,7 +114,7 @@ Through three days of experimentation, I have observed that when the return addd
 
 This technique exploits the assumption made by decompilers that normal call/return operations occur within a function. Typically, a decompiler constructs a CFG on an intra-procedural basis, assuming that each function has an identifiable entry point and a `ret`-based termination/return point.
 
-However, when the return address is manipulated such that a called function (e.g. printf in libc) transfers execution flow to a function other than the original caller, the actual execution flow continues across function boundaries. This creates a discrepancy between the CFG constructed by the decompiler and the actual execution flow, ultimately resulting in a function boundary detection failure.
+However, when the return address is manipulated such that a called function (e.g. `thrd_yield` in libc) transfers execution flow to a function other than the original caller, the actual execution flow continues across function boundaries. This creates a discrepancy between the CFG constructed by the decompiler and the actual execution flow, ultimately resulting in a function boundary detection failure.
 
 ![BRKDEC_FUNC_BOUNDARY](./rsrc/function_boundary/BRKDEC_FUNC_BOUNDARY.png)
 
