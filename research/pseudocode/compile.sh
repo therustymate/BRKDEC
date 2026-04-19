@@ -1,1 +1,0 @@
-clang -O2 -s -fvisibility=hidden research2.c -o research2

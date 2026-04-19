@@ -96,12 +96,20 @@ Static Single Assignment (SSA) is **a form of code representation in which each 
 **Commercial decompilers often cannot precisely determine runtime-dependent values** (e.g., return addresses, timestamps, or environment-dependent data). As decompilers heavily rely on the CFG, **conditional branches that depend on runtime values can be exploited to distort CFG reconstruction, resulting in misleading or junk decompiled output.**
 
 ### Validation Method
-To demonstrate the effectiveness of the outcomes, simple samples written in C and C++ will be divided into two groups: those with BRKDEC applied and those without. First, for a quick inspection, the samples will be uploaded to [Decompiler Explorer](https://dogbolt.org/) to examine the decompilation results, allowing comparison and analysis of the actual decompiled outputs. Second, for a more detailed inspection, IDA Free, Ghidra (+ Cutter), and Binary Ninja will be used to directly compare and analyze the decompilation results.
+To demonstrate the effectiveness of the outcomes, simple samples written in C and C++ will be divided into two groups: those with BRKDEC applied and those without. For a detailed inspection, IDA Free, Ghidra (+ Cutter), and Binary Ninja will be used to directly compare and analyze the decompilation results.
+
+I will compare identifiable functions within an obfuscated binary (at least functions whose execution flow can be verified or inferred from decompilation results) with functions inside a regular binary, and quantify the differences for validation.
 
 ### Validation Standards
 - Pseudocode readability
 - Variable recovery accuracy
 - Function boundary accuracy
+
+AND
+
+- **Loop count**
+- **Conditional statement count**
+- **flow change count**
 
 ### Validation Assumption
 - The compiled binary does not contain debug symbols
@@ -109,13 +117,11 @@ To demonstrate the effectiveness of the outcomes, simple samples written in C an
 
 
 ## Research
-
-### Function Boundary Obfuscation
-Through three days of experimentation, I have observed that when the return adddress is manipulated to cause an abnormal transfer of execution flow between functions, commerical decompilers fail to precisely track the actual execution path.
+Through three days of experimentation, I have observed that when the return adddress is manipulated to cause an abnormal transfer of execution flow between functions, commercial decompilers fail to precisely track the actual execution path.
 
 This technique exploits the assumption made by decompilers that normal call/return operations occur within a function. Typically, a decompiler constructs a CFG on an intra-procedural basis, assuming that each function has an identifiable entry point and a `ret`-based termination/return point.
 
-However, when the return address is manipulated such that a called function (e.g. `thrd_yield` in libc) transfers execution flow to a function other than the original caller, the actual execution flow continues across function boundaries. This creates a discrepancy between the CFG constructed by the decompiler and the actual execution flow, ultimately resulting in a function boundary detection failure.
+However, when the return address is manipulated such that a called function (e.g. `thrd_yield` in libc) transfers execution flow to a function other than the original caller, the actual execution flow continues across function boundaries. This creates a discrepancy between the CFG constructed by the decompiler and the actual execution flow, ultimately resulting in a function boundary detection failure and accurate pseudocode generation failure.
 
 ![BRKDEC_FUNC_BOUNDARY](./rsrc/function_boundary/BRKDEC_FUNC_BOUNDARY.png)
 
@@ -125,12 +131,69 @@ The research presented in that blog focused on malware and anti-decompilation te
 
 The first version was a very simple approach that used `push` to manipulate the return address. It worked fine for small programs, but I soon realized it couldn't be applied to multiple functions. I then researched the reason and discovered that the code executed after jumping into printf ended up modifying registers and corrupting the stack. Consequently, I worked with Gemini AI to add stack recovery code.
 
-### Pseudocode Obfuscation
-
-### Variable Obfuscation
-
+(The current project is version 2.0. In the future, we plan to research version 3.0 and a wider range of techniques.)
 
 ## Validation
+
+### IDA Free
+Effectiveness: **over 80%**
+
+In the case of IDA Free, functions were not decompiled properly for either binary. The Decompiler Explorer was used to verify and compare some decompilation results. The regular binary was found to have:
+- **0 loops**
+- **19 conditional statements**
+- **14 flow changes**
+
+In the code after BRKDEC was applied, the following were identified:
+- **0 loops**
+- **3 conditional statements**
+- **8 flow changes**
+
+Therefore, the impact was determined to be:
+- **0% on loops**
+- **84% on conditional statements**
+- **42% on flow changes**
+
+Since IDA Free failed to decompile the baseline binary reliably, the post-transformation result should be interpreted as an additional degradation rather than an absolute decompilation failure rate. Based on the reduction in recovered conditionals and the near-complete loss of logic, the additional impact was assessed to be **over 80%.**
+
+### Ghidra
+Effectiveness: **over 90%**
+
+In the case of Ghidra, most recovered functions degenerated into stubs centered around `thrd_yield()`. In the regular binary, the following numbers of branches were identified:  
+* **1 loop**
+* **17 conditional statements**
+* **4 flow changes**
+
+In the code after BRKDEC was applied, the following numbers of branches were identified: 
+* **0 loops**
+* **0 conditional statements**
+* **0 flow changes** 
+
+Therefore, the impact was determined to be:
+* **100% on loops**
+* **100% on conditional statements**
+* **100% on flow changes**
+
+Taking into account potential errors and disassembly, the overall impact was determined to be **over 90%**.
+
+### Binarny Ninja
+Effectiveness: **approximately 65%**
+
+In the case of Binary Ninja, functions were relatively restored to a normal state, but some executable code was treated as data, leading to losses during code recovery. The regular binary was found to have:
+- **1 loop**
+- **19 conditional statements**
+- **5 flow changes**
+
+In the code after BRKDEC was applied, the following were identified:
+- **0 loops**
+- **19 conditional statements**
+- **14 flow changes**
+
+Therefore, the impact was determined to be:
+- **100% on loops**
+- **0% on conditional statements**
+- **180% on flow changes**
+
+Although the number of recovered conditional statements remained unchanged, the loss of loop recovery and the substantial increase in control-flow transfers significantly fragmented the reconstructed CFG. Because the overall algorithm remained partially interpretable, the net effectiveness was assessed at **approximately 65%**.
 
 
 ## Limitations
