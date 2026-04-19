@@ -123,7 +123,7 @@ This technique exploits the assumption made by decompilers that normal call/retu
 
 However, when the return address is manipulated such that a called function (e.g. `thrd_yield` in libc) transfers execution flow to a function other than the original caller, the actual execution flow continues across function boundaries. This creates a discrepancy between the CFG constructed by the decompiler and the actual execution flow, ultimately resulting in a function boundary detection failure and accurate pseudocode generation failure.
 
-![BRKDEC_FUNC_BOUNDARY](./rsrc/function_boundary/BRKDEC_FUNC_BOUNDARY.png)
+![BRKDEC_FUNC_BOUNDARY](./rsrc/BRKDEC_FUNC_BOUNDARY.png)
 
 [Ret2 Reverse Engineering Blog](https://blog.ret2.io/2017/11/16/dangers-of-the-decompiler/) also introduced a related technique. In that blog post, an exploit-like stack pivoting technique was demonstrated using a ROP chain embedded within the binary to achieve return hijacking.
 
