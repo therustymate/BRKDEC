@@ -195,9 +195,14 @@ Therefore, the impact was determined to be:
 
 Although the number of recovered conditional statements remained unchanged, the loss of loop recovery and the substantial increase in control-flow transfers significantly fragmented the reconstructed CFG. Because the overall algorithm remained partially interpretable, the net effectiveness was assessed at **approximately 65%**.
 
+### Windows
+Windows operates in the same way, but the specific figures may differ (in actual experimental data, IDA Free, Ghidra, and Binary Ninja all showed improved results). As a result of emulation using QEMU, the binary’s normal operation was **tested 10 times, and all 10 tests confirmed normal functionality**. The difficulty of reverse engineering, even after (inadvertently) applying symbols, showed approximately **5-10% greater impact compared to Linux binaries.**
+
 
 ## Limitations
-
+* **Binary Patch**: If the BRKDEC code is removed via binary patching, **the original program can be immediately exposed**. If one understands the source code of BRKDEC and is able to patch the binary, meaningful decompilation results can be obtained.
+* **Memory Stability**: This issue was identified previously as well: **code that manipulates registers through low-level access can destabilize or completely corrupt the stack**.
+* **Performance Degradation**: From a performance perspective, **repeatedly saving all registers to the stack can accumulate performance overhead, potentially leading to significant degradation over time**. Applying BRKDEC globally, especially to large-scale software, may be unstable from a memory standpoint.
 
 ## References
 ChatGPT, Gemini, and DeepSeek were used to improve the technical English expressions in this document.

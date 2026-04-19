@@ -2,7 +2,12 @@
 #define BRKDEC
 
 #include <stdio.h>
-#include <threads.h>
+#if defined(_WIN32)
+    #include <windows.h>
+    #define thrd_yield() SwitchToThread()
+#else
+    #include <threads.h>
+#endif
 
 static inline void TRIGGER_FUNCTION() { thrd_yield(); }
 static inline void RETURN_CALL() {
