@@ -131,7 +131,7 @@ The research presented in that blog focused on malware and anti-decompilation te
 
 The first version was a very simple approach that used `push` to manipulate the return address. It worked fine for small programs, but I soon realized it couldn't be applied to multiple functions. I then researched the reason and discovered that the code executed after jumping into printf ended up modifying registers and corrupting the stack. Consequently, I worked with Gemini AI to add stack recovery code.
 
-(The current project is version 2.0. In the future, we plan to research version 3.0 and a wider range of techniques.)
+(The current project is version 2.0. In the future, I plan to research version 3.0 and a wider range of techniques.)
 
 ## Validation
 
