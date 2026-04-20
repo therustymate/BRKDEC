@@ -138,7 +138,7 @@ The first version was a very simple approach that used `push` to manipulate the 
 ### IDA Free
 Effectiveness: **over 80%**
 
-In the case of IDA Free, functions were not decompiled properly for either binary. The Decompiler Explorer was used to verify and compare some decompilation results. The regular binary was found to have:
+In the case of IDA Free, functions were not decompiled properly for either binary. The Decompiler Explorer was used to verify and compare some decompilation results. In the regular binary, the following numbers of branches were identified:
 - **0 loops**
 - **19 conditional statements**
 - **14 flow changes**
@@ -158,7 +158,7 @@ Since IDA Free failed to decompile the baseline binary reliably, the post-transf
 ### Ghidra
 Effectiveness: **over 90%**
 
-In the case of Ghidra, most recovered functions degenerated into stubs centered around `thrd_yield()`. In the regular binary, the following numbers of branches were identified:  
+In the case of Ghidra, most recovered functions degenerated into stubs centered around `thrd_yield()`. In the regular binary, the following numbers of branches were identified:
 * **1 loop**
 * **17 conditional statements**
 * **4 flow changes**
@@ -178,7 +178,7 @@ Taking into account potential errors and disassembly, the overall impact was det
 ### Binarny Ninja
 Effectiveness: **approximately 65%**
 
-In the case of Binary Ninja, functions were relatively restored to a normal state, but some executable code was treated as data, leading to losses during code recovery. The regular binary was found to have:
+In the case of Binary Ninja, functions were relatively restored to a normal state, but some executable code was treated as data, leading to losses during code recovery. In the regular binary, the following numbers of branches were identified:
 - **1 loop**
 - **19 conditional statements**
 - **5 flow changes**
