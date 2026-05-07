@@ -135,6 +135,8 @@ The first version was a very simple approach that used `push` to manipulate the 
 
 ## Validation
 
+Based-on: `BRKDEC v2.0`
+
 ### IDA Free
 Effectiveness: **over 80%**
 
