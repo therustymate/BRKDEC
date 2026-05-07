@@ -36,7 +36,7 @@ static inline void RETURN_CALL() {
         "pushq %%rax\n\t"       // rsp % 16 == 8
 
         // [ JUMP TO TRIGGER ]
-        "jmp *%0\n\t"           // 
+        "jmp *%0\n\t"           // ABI calling convention is correct
 
         "1:\n\t"
         // FUNCTION_ENTRY (rsp % 16 == 0) | THE FUNCTION IS RETURN (NOT CALL)
