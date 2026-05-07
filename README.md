@@ -52,8 +52,10 @@ The outcome of this project will be tested on the binaries for the following ope
 ### Compilers
 * Windows Compiler
   * x86_64-w64-mingw32-gcc (GCC) 13-win32
+    * `x86_64-w64-mingw32-gcc -O2 -o [OUTPUT] [C_CODE]`
 * Ubuntu Compiler
   * Ubuntu clang version 18.1.3 (1ubuntu1)
+    * `clang -O2 -s -fvisibility=hidden [C_CODE] -o [OUTPUT]`
 
 
 ## Methodology
