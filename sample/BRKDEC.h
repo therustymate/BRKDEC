@@ -13,26 +13,27 @@ static inline void TRIGGER_FUNCTION() { thrd_yield(); }
 static inline void RETURN_CALL() {
     void* TRIGGER = (void*)TRIGGER_FUNCTION;
     __asm__ volatile (
+        // FUNCTION_ENTRY (rsp % 16 == 8)
         // [ SAVE REGISTERS ]
-        "pushq %%rax\n\t"
-        "pushq %%rcx\n\t"
-        "pushq %%rdx\n\t"
-        "pushq %%rbx\n\t"
-        "pushq %%rsi\n\t"
-        "pushq %%rdi\n\t"
-        "pushq %%r8\n\t"
-        "pushq %%r9\n\t"
-        "pushq %%r10\n\t"
-        "pushq %%r11\n\t"
-        "pushq %%rbp\n\t"
+        "pushq %%rax\n\t"       // rsp % 16 == 0
+        "pushq %%rcx\n\t"       // rsp % 16 == 8
+        "pushq %%rdx\n\t"       // rsp % 16 == 0
+        "pushq %%rbx\n\t"       // rsp % 16 == 8
+        "pushq %%rsi\n\t"       // rsp % 16 == 0
+        "pushq %%rdi\n\t"       // rsp % 16 == 8
+        "pushq %%r8\n\t"        // rsp % 16 == 0
+        "pushq %%r9\n\t"        // rsp % 16 == 8
+        "pushq %%r10\n\t"       // rsp % 16 == 0
+        "pushq %%r11\n\t"       // rsp % 16 == 8
+        "pushq %%rbp\n\t"       // rsp % 16 == 0
         "movq %%rsp, %%rbp\n\t"
 
         // [ STACK ALIGNMENT ]
-        "andq $-16, %%rsp\n\t"
+        // "andq $-16, %%rsp\n\t"  // not needed
 
         // [ RETURN ADDRESS MANIPULATION ]
         "leaq 1f(%%rip), %%rax\n\t"
-        "pushq %%rax\n\t"
+        "pushq %%rax\n\t"       // rsp % 16 == 8
 
         // [ JUMP TO TRIGGER ]
         "jmp *%0\n\t"
