@@ -140,8 +140,6 @@ The first version was a very simple approach that used `push` to manipulate the 
 Based-on: `BRKDEC v2.0`
 
 ### IDA Free
-Effectiveness: **over 80%**
-
 In the case of IDA Free, functions were not decompiled properly for either binary. The Decompiler Explorer was used to verify and compare some decompilation results. In the regular binary, the following numbers of branches were identified:
 - **0 loops**
 - **19 conditional statements**
@@ -160,8 +158,6 @@ Therefore, the impact was determined to be:
 Since IDA Free failed to decompile the baseline binary reliably, the post-transformation result should be interpreted as an additional degradation rather than an absolute decompilation failure rate. Based on the reduction in recovered conditionals and the near-complete loss of logic, the additional impact was assessed to be **over 80%.**
 
 ### Ghidra
-Effectiveness: **over 90%**
-
 In the case of Ghidra, most recovered functions degenerated into stubs centered around `thrd_yield()`. In the regular binary, the following numbers of branches were identified:
 * **1 loop**
 * **17 conditional statements**
@@ -180,8 +176,6 @@ Therefore, the impact was determined to be:
 Taking into account potential errors and disassembly, the overall impact was determined to be **over 90%**.
 
 ### Binarny Ninja
-Effectiveness: **approximately 65%**
-
 In the case of Binary Ninja, functions were relatively restored to a normal state, but some executable code was treated as data, leading to losses during code recovery. In the regular binary, the following numbers of branches were identified:
 - **1 loop**
 - **19 conditional statements**
