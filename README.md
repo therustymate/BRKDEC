@@ -155,7 +155,7 @@ Therefore, the impact was determined to be:
 - **84% on conditional statements**
 - **42% on flow changes**
 
-Since IDA Free failed to decompile the baseline binary reliably, the post-transformation result should be interpreted as an additional degradation rather than an absolute decompilation failure rate. Based on the reduction in recovered conditionals and the near-complete loss of logic, the additional impact was assessed to be **over 80%.**
+Since IDA Free failed to decompile the baseline binary reliably, the post-transformation result should be interpreted as an additional degradation rather than an absolute decompilation failure rate.
 
 ### Ghidra
 In the case of Ghidra, most recovered functions degenerated into stubs centered around `thrd_yield()`. In the regular binary, the following numbers of branches were identified:
@@ -173,8 +173,6 @@ Therefore, the impact was determined to be:
 * **100% on conditional statements**
 * **100% on flow changes**
 
-Taking into account potential errors and disassembly, the overall impact was determined to be **over 90%**.
-
 ### Binarny Ninja
 In the case of Binary Ninja, functions were relatively restored to a normal state, but some executable code was treated as data, leading to losses during code recovery. In the regular binary, the following numbers of branches were identified:
 - **1 loop**
@@ -191,7 +189,7 @@ Therefore, the impact was determined to be:
 - **0% on conditional statements**
 - **180% on flow changes**
 
-Although the number of recovered conditional statements remained unchanged, the loss of loop recovery and the substantial increase in control-flow transfers significantly fragmented the reconstructed CFG. Because the overall algorithm remained partially interpretable, the net effectiveness was assessed at **approximately 65%**.
+Although the number of recovered conditional statements remained unchanged, the loss of loop recovery and the substantial increase in control-flow transfers significantly fragmented the reconstructed CFG.
 
 ### Windows
 Windows operates in the same way, but the specific figures may differ (in actual experimental data, IDA Free, Ghidra, and Binary Ninja all showed improved results). As a result of emulation using QEMU, the binary’s normal operation was **tested 10 times, and all 10 tests confirmed normal functionality**. The difficulty of reverse engineering, even after (inadvertently) applying symbols, showed approximately **5-10% greater impact compared to Linux binaries.**
